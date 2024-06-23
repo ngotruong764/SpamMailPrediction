@@ -50,8 +50,16 @@ Y = train_data['Category']
     # random_state simply sets a seed to the random generator, so that your train-test splits are always deterministic.
     # If you don't set a seed, it is different each time.
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=3)
+data_split = ['Training Set', 'Test Set']
+data_count = [len(X_train), len(X_test)]
 
-# feature extraction: transform the text data( X) to feature vector( numerical( that can be used as input for Logistic
+plt.figure(figsize=(8, 6))
+plt.bar(data_split, data_count, color=['orange', 'blue'])
+plt.ylabel('Number of Samples')
+plt.title('Number of Samples in Training and Test Set')
+plt.show()
+
+# feature extraction: transform the text data( X) to feature vector( numerical) that can be used as input for Logistic
 # regression model
     # feature extraction: the mapping from texture data to real valued vectors( numerical representation of this textual data)
     # feature extraction algorithm tries to create a list with all the unique words present in the particular text,
@@ -72,8 +80,10 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
         # specifies the stop words to be removed from teh text before processing
         # stop_word = 'english': common English stop word( 'and', 'the', 'is', ...) will be removed
     # lowercase = 'True': all the letter will be convert to towercase
-feature_extraction = TfidfVectorizer(min_df=1, stop_words='english', lowercase=True)
+
 # fit_transform: fit all the input data into vectorizer function and transform to feature vector( numerical value)
+
+feature_extraction = TfidfVectorizer(min_df=1, stop_words='english', lowercase=True)
 X_train_features = feature_extraction.fit_transform(X_train)
 X_test_features = feature_extraction.transform(X_test)
 
